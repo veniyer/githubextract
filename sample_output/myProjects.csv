@@ -1,0 +1,23 @@
+projectID,projectName,columnID,columnName,cardID,cardName
+2752148,"testProject",5590424,"To do",22519684,":sparkles: **Welcome to GitHub Projects** :sparkles:\nWe're so excited that you've decided to create a new project! Now that you're here, let's make sure you know how to get the most out of GitHub Projects.\n- [x] Create a new project\n- [x] Give your project a name\n- [ ] Press the <kbd>?</kbd> key to see available keyboard shortcuts\n- [ ] Add a new column\n- [ ] Drag and drop this card to the new column\n- [ ] Search for and add issues or PRs to your project\n- [ ] Manage automation on columns\n- [ ] [Archive a card](https://help.github.com/articles/archiving-cards-on-a-project-board/) or archive all cards in a column\n"
+2752148,"testProject",5590424,"To do",22519683,"**Cards**\nCards can be added to your board to track the progress of issues and pull requests. You can also add note cards, like this one!\n"
+2752148,"testProject",5590424,"To do",22519682,"**Automation**\n[Automatically move your cards](https://help.github.com/articles/configuring-automation-for-project-boards/) to the right place based on the status and activity of your issues and pull requests.\n"
+2752148,"testProject",5590425,"In progress",22519712,"this is a test note"
+2752148,"testProject",5590426,"Done",22521356,null
+2752148,"testProject",5590426,"Done",22519719,"this task is done"
+2752311,"testrepooutsidetherepo",5590782,"To do",22521074,":sparkles: **Welcome to GitHub Projects** :sparkles:\nWe're so excited that you've decided to create a new project! Now that you're here, let's make sure you know how to get the most out of GitHub Projects.\n- [x] Create a new project\n- [x] Give your project a name\n- [ ] Press the <kbd>?</kbd> key to see available keyboard shortcuts\n- [ ] Add a new column\n- [ ] Drag and drop this card to the new column\n- [ ] Search for and add issues or PRs to your project\n- [ ] Manage automation on columns\n- [ ] [Archive a card](https://help.github.com/articles/archiving-cards-on-a-project-board/) or archive all cards in a column\n"
+2752311,"testrepooutsidetherepo",5590782,"To do",22521073,"**Cards**\nCards can be added to your board to track the progress of issues and pull requests. You can also add note cards, like this one!\n"
+2752311,"testrepooutsidetherepo",5590782,"To do",22521072,"**Automation**\n[Automatically move your cards](https://help.github.com/articles/configuring-automation-for-project-boards/) to the right place based on the status and activity of your issues and pull requests.\n"
+2752311,"testrepooutsidetherepo",5653602,"newTestColumn",22798413,"this is a test card note"
+2824565,"AutomatedKanban",5733832,"To do",23127775,":sparkles: **Welcome to GitHub Projects** :sparkles:\nWe're so excited that you've decided to create a new project! Now that you're here, let's make sure you know how to get the most out of GitHub Projects.\n- [x] Create a new project\n- [x] Give your project a name\n- [ ] Press the <kbd>?</kbd> key to see available keyboard shortcuts\n- [ ] Add a new column\n- [ ] Drag and drop this card to the new column\n- [ ] Search for and add issues or PRs to your project\n- [ ] Manage automation on columns\n- [ ] [Archive a card](https://help.github.com/articles/archiving-cards-on-a-project-board/) or archive all cards in a column\n"
+2824565,"AutomatedKanban",5733832,"To do",23127774,"**Cards**\nCards can be added to your board to track the progress of issues and pull requests. You can also add note cards, like this one!\n"
+2824565,"AutomatedKanban",5733832,"To do",23127773,"**Automation**\n[Automatically move your cards](https://help.github.com/articles/configuring-automation-for-project-boards/) to the right place based on the status and activity of your issues and pull requests.\n"
+2824565,"AutomatedKanban",5733833,"In progress",23127798,null
+2824565,"AutomatedKanban",5733833,"In progress",23127795,"Added again"
+2824565,"AutomatedKanban",5733833,"In progress",23127792,"Added now"
+2824565,"AutomatedKanban",5733834,"Review in progress",23127810,"Added another one"
+2824565,"AutomatedKanban",5733834,"Review in progress",23127806,"This is review in progress"
+2824565,"AutomatedKanban",5733835,"Reviewer approved",23127827,"The reviewer has approved this 4\r\n"
+2824565,"AutomatedKanban",5733835,"Reviewer approved",23127826,"The reviewer has approved this 2"
+2824565,"AutomatedKanban",5733835,"Reviewer approved",23127821,"The reviewer has approved this 1"
+2824565,"AutomatedKanban",5736961,"democolumn",23144107,"this is a note in the demo column"

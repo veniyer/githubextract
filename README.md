@@ -4,12 +4,15 @@ Authentication
 ==============
 
 The program expects a config file located at ~/.githubextract.config
+
 MacBook-Pro:githubextract viyer$ ls ~/.gitHubExtract.config 
 /Users/viyer/.gitHubExtract.config
 
 The contents of the file are as such
+
 username=cognosante1ven1iyer
 password=*************
+
 
 (Note you can setup any GitHub account of your own for trying this program)
 
