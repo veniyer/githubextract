@@ -103,6 +103,53 @@ const getCardsInColumn = async (columnID) => {
 	}  
 }
 
+//This function gets all the repos for a user
+const getReposForUser = async () => {
+	try {
+	    const result = await octokit.repos.list()
+	    if(result.status === 200) {
+	        return {
+	            status: true, 
+	            data: result.data
+	        }
+	    } else {
+	        return {
+	            status: false,
+	            data: data
+	        }
+	    }
+	} catch (error) {
+	    return {
+	        status: false,
+	        data: data
+	    }
+	}  
+}
+
+//This function gets all the repos for a user
+const getIssuesInRepo = async (owner, repoName) => {
+	try {
+	    const result = await octokit.issues.listForRepo({owner: usernameS,repo: repoName})
+	    if(result.status === 200) {
+	    	
+	        return {
+	            status: true, 
+	            data: result.data
+	        }
+	    } else {
+	        return {
+	            status: false,
+	            data: data
+	        }
+	    }
+	} catch (error) {
+	    return {
+	        status: false,
+	        data: data
+	    }
+	}  
+}
+
 //Main of the program
 const start = async function() {
   //First get the projects for the user
@@ -165,6 +212,54 @@ const start = async function() {
 
 	  }
    }
+
+	//Get started on extract of repos and issues
+	//First get the projects for the user
+	const getReposForUserResult = await getReposForUser();
+	var listOfRepos = util.inspect(getReposForUserResult.data, {depth: null});
+	//console.log(listOfRepos);
+	//Setup the file with csv file column names
+	var writeIssuesData = 'repoID' + ',' + 'repoName' + ',' + 'issueID' + ',' + 'issueTitle' + ',' + 'issueBody';	 
+	fs.appendFile('myIssues.csv', writeIssuesData + eol, function (err) {
+					if (err) {
+					// append failed
+					} else {
+					// done
+					}
+				})
+	//Loop through the list of repos retrieved
+
+  	for(var i = 0; i < getReposForUserResult.data.length; i++) {
+  	  //For each repo do this
+	  var repoName = await jq.run('.['+i+'].name', getReposForUserResult.data, { input: 'json' });
+	  var repoID = await jq.run('.['+i+'].id', getReposForUserResult.data, { input: 'json' });
+	  
+	  //console.log("Found" + repoID + repoName.replace(/\"/g,'') )
+
+      //Prepare to get issues in a repo
+	  const getIssuesInRepoResult = await getIssuesInRepo(usernameS,repoName.replace(/\"/g,''));
+	  var listOfIssues = util.inspect(getIssuesInRepoResult.data, {depth: null});
+	  //console.log(listOfIssues);
+	  
+	  for(var j = 0; j < getIssuesInRepoResult.data.length; j++) {
+	  	  //For each issue do this
+		  var issueTitle = await jq.run('.['+j+'].title', getIssuesInRepoResult.data, { input: 'json' });
+		  var issueBody = await jq.run('.['+j+'].body', getIssuesInRepoResult.data, { input: 'json' });
+		  var issueID = await jq.run('.['+j+'].id', getIssuesInRepoResult.data, { input: 'json' });
+		  //console.log("Found" + issueTitle + issueBody + issueID)
+
+		  //Write the card data to the csv file
+		  writeIssuesData = repoID + ',' + repoName + ',' + issueID + ',' + issueBody + ',' + issueTitle;
+	  	  console.log("Writing..." + writeIssuesData)
+			fs.appendFile('myIssues.csv', writeIssuesData + eol, function (err) {
+				if (err) {
+				// append failed
+				} else {
+				// done
+				}
+			})
+		}
+	}
 }
 //Starting the program here
 start();
