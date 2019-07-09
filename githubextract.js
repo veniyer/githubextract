@@ -249,7 +249,7 @@ const start = async function() {
 		  //console.log("Found" + issueTitle + issueBody + issueID)
 
 		  //Write the card data to the csv file
-		  writeData = 'Repo'  + ','+ repoID + ',' + repoName + ',' + '' + ',' + '' + ',' + 'Incident' + ',' + issueID + ',' + issueBody + ',' + issueTitle;
+		  writeData = 'Repo'  + ','+ repoID + ',' + repoName + ',' + '' + ',' + issueTitle + ',' + 'Incident' + ',' + issueID + ',' + issueBody;
 	  	  console.log("Writing..." + writeData)
 			fs.appendFile('myProjects.csv', writeData + eol, function (err) {
 				if (err) {

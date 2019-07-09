@@ -21,5 +21,5 @@ Writing...Project,2824565,"AutomatedKanban",5733835,"Reviewer approved",Note,231
 Writing...Project,2824565,"AutomatedKanban",5733835,"Reviewer approved",Note,23127826,"The reviewer has approved this 2"
 Writing...Project,2824565,"AutomatedKanban",5733835,"Reviewer approved",Note,23127821,"The reviewer has approved this 1"
 Writing...Project,2824565,"AutomatedKanban",5736961,"democolumn",Note,23144107,"this is a note in the demo column"
-Writing...Repo,190792991,"test1",,,Incident,453671783,"this is a test body","this is a note"
-Writing...Repo,191987086,"test2",,,Incident,459893378,"this is in progress body","This is in progress"
+Writing...Repo,190792991,"test1",,"this is a note",Incident,453671783,"this is a test body"
+Writing...Repo,191987086,"test2",,"This is in progress",Incident,459893378,"this is in progress body"
