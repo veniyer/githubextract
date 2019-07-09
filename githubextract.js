@@ -158,7 +158,7 @@ const start = async function() {
   //console.log(listOfProjects);
 
   //Setup the file with csv file column names
-  var writeData = 'projectID' + ',' + 'projectName' + ',' + 'columnID' + ',' + 'columnName' + ',' + 'cardID' + ',' + 'cardName'; 	 
+  var writeData = 'Type' + ',' + 'ID' + ',' + 'Name' + ',' + 'columnID' + ',' + 'columnName' + ',' + 'ContentType' + ',' + 'ContentID' + ',' + 'Content'; 	 
   fs.appendFile('myProjects.csv', writeData + eol, function (err) {
 					if (err) {
 					// append failed
@@ -199,7 +199,7 @@ const start = async function() {
 			  var cardID = await jq.run('.['+k+'].id', getCardsInColumnResult.data, { input: 'json' });
 			  
 			  //Write the card data to the csv file
-			  writeData = projectID + ',' + projectName + ',' + columnID + ',' + columnName + ',' + cardID + ',' + cardName;
+			  writeData = 'Project' + ',' + projectID + ',' + projectName + ',' + columnID + ',' + columnName + ',' + 'Note' + ',' + cardID + ',' + cardName;
 		  	  console.log("Writing..." + writeData)
 				fs.appendFile('myProjects.csv', writeData + eol, function (err) {
 					if (err) {
@@ -219,14 +219,14 @@ const start = async function() {
 	var listOfRepos = util.inspect(getReposForUserResult.data, {depth: null});
 	//console.log(listOfRepos);
 	//Setup the file with csv file column names
-	var writeIssuesData = 'repoID' + ',' + 'repoName' + ',' + 'issueID' + ',' + 'issueTitle' + ',' + 'issueBody';	 
-	fs.appendFile('myIssues.csv', writeIssuesData + eol, function (err) {
+	//var writeIssuesData = 'repoID' + ',' + 'repoName' + ',' + 'issueID' + ',' + 'issueTitle' + ',' + 'issueBody';	 
+	/*fs.appendFile('myIssues.csv', writeData + eol, function (err) {
 					if (err) {
 					// append failed
 					} else {
 					// done
 					}
-				})
+				})*/
 	//Loop through the list of repos retrieved
 
   	for(var i = 0; i < getReposForUserResult.data.length; i++) {
@@ -249,9 +249,9 @@ const start = async function() {
 		  //console.log("Found" + issueTitle + issueBody + issueID)
 
 		  //Write the card data to the csv file
-		  writeIssuesData = repoID + ',' + repoName + ',' + issueID + ',' + issueBody + ',' + issueTitle;
-	  	  console.log("Writing..." + writeIssuesData)
-			fs.appendFile('myIssues.csv', writeIssuesData + eol, function (err) {
+		  writeData = 'Repo'  + ','+ repoID + ',' + repoName + ',' + '' + ',' + '' + ',' + 'Incident' + ',' + issueID + ',' + issueBody + ',' + issueTitle;
+	  	  console.log("Writing..." + writeData)
+			fs.appendFile('myProjects.csv', writeData + eol, function (err) {
 				if (err) {
 				// append failed
 				} else {
