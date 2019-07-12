@@ -24,13 +24,33 @@ passwordS=configInfo[1].split("=")[1];
 
 const Octokit = require('@octokit/rest')
 
-const octokit = new Octokit({
+/*const octokit = new Octokit({
  auth: {
    username: usernameS,
    password: passwordS,
  }
+})*/
+/*const octokit = new Octokit();
+octokit.authenticate({
+	type: 'token'
+    auth: 'token jkljkl'
+})*/
+const octokit = new Octokit({
+	//mytoken
+ auth: 'token jlkjlk'
+ //shane token
+ //auth: 'token jlkjlk'
 })
-
+/*const getOctokit = async () => {	
+try{
+const octokit = new Octokit({
+ auth: `token jlkjkl`
+})
+}
+catch (error) {
+	    
+	}  
+}*/
 //This function gets list of projects for the user in blocking form
 const getProjects = async (usernameS) => {
 	try {
@@ -217,7 +237,7 @@ const start = async function() {
 	//First get the projects for the user
 	const getReposForUserResult = await getReposForUser();
 	var listOfRepos = util.inspect(getReposForUserResult.data, {depth: null});
-	//console.log(listOfRepos);
+	console.log(listOfRepos);
 	//Setup the file with csv file column names
 	//var writeIssuesData = 'repoID' + ',' + 'repoName' + ',' + 'issueID' + ',' + 'issueTitle' + ',' + 'issueBody';	 
 	/*fs.appendFile('myIssues.csv', writeData + eol, function (err) {
@@ -234,7 +254,7 @@ const start = async function() {
 	  var repoName = await jq.run('.['+i+'].name', getReposForUserResult.data, { input: 'json' });
 	  var repoID = await jq.run('.['+i+'].id', getReposForUserResult.data, { input: 'json' });
 	  
-	  //console.log("Found" + repoID + repoName.replace(/\"/g,'') )
+	  console.log("Found" + repoID + repoName.replace(/\"/g,'') )
 
       //Prepare to get issues in a repo
 	  const getIssuesInRepoResult = await getIssuesInRepo(usernameS,repoName.replace(/\"/g,''));
