@@ -12,6 +12,8 @@ The contents of the file are as such
 ```
 username=cognosante1ven1iyer
 password=*************
+token=************************
+projectID=*****
 ```
 
 (Note you can setup any GitHub account of your own for trying this program)
@@ -41,12 +43,8 @@ $ node githubextract.js
 Output
 ======
 
-The program produces two files in the working directory
+The program produces one file in the working directory
 ```
-myProjects.csv
--Contains the projects information
+project_extract.csv
+-Contains the projects information with notes and incidents combined in one file
 ````
-```
-myIssues.csv
--Contains the issues information
-```
