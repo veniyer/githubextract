@@ -24,7 +24,7 @@ configInfo = fileAsString.split("\n");
 usernameS=configInfo[0].split("=")[1];
 passwordS=configInfo[1].split("=")[1];
 tokenS=configInfo[2].split("=")[1];
-projectIDToExtract=configInfo[3].split("=")[1];
+//projectIDToExtract=configInfo[3].split("=")[1];
 const Octokit = require('@octokit/rest')
 
 const octokit = new Octokit({
@@ -47,7 +47,30 @@ const octokit = new Octokit({
         }
       })
 
-console.log("projectID to extract is" +  projectIDToExtract)
+// Register new endpoint in octokit (issues/{id} endpoints aren't implemented.)
+    octokit.registerEndpoints({
+        projects: {
+          getProjectsForOwnerInRepo: {
+            method: 'GET',
+            url: '/repos/{owner}/{repo}/projects',
+            headers: {
+              accept: 'application/vnd.github.inertia-preview+json'
+            },
+            params: {
+              owner: {
+                required: true,
+                type: 'string'
+              },
+              repo: {
+                required: true,
+                type: 'string'
+              }
+             
+            }
+          }
+        }
+      })
+
 //This function gets list of projects for the user in blocking form
 
 //This function gets list of projects for the user in blocking form
@@ -55,6 +78,30 @@ const getProjects = async (usernameS) => {
 	try {
 	    const result = await octokit.projects.listForUser({
 	username: usernameS})
+	    if(result.status === 200) {
+	        return {
+	            status: true, 
+	            data: result.data
+	        }
+	    } else {
+	        return {
+	            status: false,
+	            data: data
+	        }
+	    }
+	} catch (error) {
+	    return {
+	        status: false,
+	        data: data
+	    }
+	}  
+}
+
+//This function gets list of projects for the user in blocking form
+const getProjectsForOwnerInRepo = async (ownerS, repoS) => {
+	try {
+	    const result = await octokit.projects.getProjectsForOwnerInRepo({
+	owner: owner1,repo: repo1 })
 	    if(result.status === 200) {
 	        return {
 	            status: true, 
@@ -220,8 +267,30 @@ const getIssuesInRepo = async (owner, repoName) => {
 
 //Main of the program
 const start = async function() {
+  var myArgs = process.argv.slice(2);
+  //console.log('myArgs: ', myArgs);
+
   //First get the projects for the user
-  console.log("Project to extract ---  " + projectIDToExtract);
+  //owner1 = 'department-of-veterans-affairs';
+  owner1 = myArgs[0];
+  //repo1='azure-management';
+  repo1 = myArgs[1];
+  //project1='Azure Migration Projects';
+  project1 = myArgs[2];
+  const getProjectsForOwnerInRepoResult = await getProjectsForOwnerInRepo({owner: owner1,repo: repo1});
+  for(var j = 0; j < getProjectsForOwnerInRepoResult.data.length; j++) {
+	  	  //For each column do this
+		  var projectName = await jq.run('.['+j+'].name', getProjectsForOwnerInRepoResult.data, { input: 'json' });
+		  var projectID = await jq.run('.['+j+'].id', getProjectsForOwnerInRepoResult.data, { input: 'json' });
+		  projectName=projectName.replace('\"', "");
+		  projectName=projectName.replace('\"', "");
+		  if(projectName==project1)
+		  {
+		  	projectIDToExtract=projectID;
+		  	console.log("will extract projectName " + projectName + " with projectID " + projectID);
+		  }
+   }
+
   const result = await getProjectWithID(projectIDToExtract);
   var project = util.inspect(result.data, {depth: null});
 
