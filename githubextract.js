@@ -36,8 +36,16 @@ const octokit = new Octokit({
         issues: {
           getIssue: {
             method: 'GET',
-            url: '/repos/department-of-veterans-affairs/azure-management/issues/{issue_id}',
+            url: '/repos/{owner}/{repo}/issues/{issue_id}',
             params: {
+              owner: {
+                required: true,
+                type: 'string'
+              },
+              repo: {
+                required: true,
+                type: 'string'
+              },
               issue_id: {
                 required: true,
                 type: 'string'
@@ -101,7 +109,7 @@ const getProjects = async (usernameS) => {
 const getProjectsForOwnerInRepo = async (ownerS, repoS) => {
 	try {
 	    const result = await octokit.projects.getProjectsForOwnerInRepo({
-	owner: owner1,repo: repo1 })
+	owner: ownerS,repo: repoS })
 	    if(result.status === 200) {
 	        return {
 	            status: true, 
@@ -120,6 +128,7 @@ const getProjectsForOwnerInRepo = async (ownerS, repoS) => {
 	    }
 	}  
 }
+
 
 //This function gets a project with its id
 const getProjectWithID = async (projectID) => {
@@ -147,10 +156,10 @@ const getProjectWithID = async (projectID) => {
 
 
 //get issue with id
-const getIssueWithID = async (issueID) => {
+const getIssueWithID = async (ownerS,repoS,issueID) => {
 	try {
 	    const result = await octokit.issues.getIssue({
-	issue_id: issueID})
+	owner: ownerS,repo: repoS,issue_id: issueID})
 	    if(result.status === 200) {
 	        return {
 	            status: true, 
@@ -271,13 +280,13 @@ const start = async function() {
   //console.log('myArgs: ', myArgs);
 
   //First get the projects for the user
-  //owner1 = 'department-of-veterans-affairs';
+  //owner1 = '************';
   owner1 = myArgs[0];
-  //repo1='azure-management';
+  //repo1='**********';
   repo1 = myArgs[1];
-  //project1='Azure Migration Projects';
+  //project1='************';
   project1 = myArgs[2];
-  const getProjectsForOwnerInRepoResult = await getProjectsForOwnerInRepo({owner: owner1,repo: repo1});
+  const getProjectsForOwnerInRepoResult = await getProjectsForOwnerInRepo(owner1,repo1);
   for(var j = 0; j < getProjectsForOwnerInRepoResult.data.length; j++) {
 	  	  //For each column do this
 		  var projectName = await jq.run('.['+j+'].name', getProjectsForOwnerInRepoResult.data, { input: 'json' });
@@ -343,7 +352,7 @@ const start = async function() {
 			  	var contentURL = await jq.run('.['+k+'].content_url', getCardsInColumnResult.data, { input: 'json' });
 			  	var issueID  = contentURL.split("/")[contentURL.split("/").length-1];
 			  	//console.log("getting issue with " + issueID);
-			  	const resultIssue = await getIssueWithID(issueID);
+			  	const resultIssue = await getIssueWithID(owner1,repo1,issueID);
 				var issue = util.inspect(resultIssue.data, {depth: null});
 				//console.log("Found issue ************" + issue);
 
