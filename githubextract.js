@@ -16,7 +16,7 @@ var configInfo;
 var usernameS;
 var passwordS;
 var tokenS;
-var projectIDToExtract;
+var projectIDToExtract, projectNameToExtract;
 //Config info is at ~/.gitHubExtract.config
 var data = fs.readFileSync(homedir + '/.gitHubExtract.config','utf8')
 var fileAsString = data.toString();
@@ -296,6 +296,7 @@ const start = async function() {
 		  if(projectName==project1)
 		  {
 		  	projectIDToExtract=projectID;
+		  	projectNameToExtract = projectName;
 		  	console.log("will extract projectName " + projectName + " with projectID " + projectID);
 		  }
    }
@@ -303,9 +304,12 @@ const start = async function() {
   const result = await getProjectWithID(projectIDToExtract);
   var project = util.inspect(result.data, {depth: null});
 
+
   //Setup the file with csv file column names
+  projectNameToExtract = projectNameToExtract.replace(/ /g, "-");
+  var filename = 'project_extract' + projectNameToExtract + '.csv';
   var writeData = 'Type' + ',' + 'ID' + ',' + 'Name' + ',' + 'columnID' + ',' + 'columnName' + ',' + 'ContentType' + ',' + 'ContentID' + ',' + 'Content'; 	 
-  fs.appendFile('project_extract.csv', writeData + eol, function (err) {
+  fs.appendFile(filename, writeData + eol, function (err) {
 					if (err) {
 					// append failed
 					} else {
@@ -370,7 +374,7 @@ const start = async function() {
 			  
 			  }
 			  console.log("Writing..." + writeData)
-				fs.appendFile('project_extract.csv', writeData + eol, function (err) {
+				fs.appendFile(filename, writeData + eol, function (err) {
 					if (err) {
 					// append failed
 					} else {
