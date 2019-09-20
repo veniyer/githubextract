@@ -306,8 +306,9 @@ const start = async function() {
 
 
   //Setup the file with csv file column names
+  var d = new Date().toISOString().slice(0,10);
   projectNameToExtract = projectNameToExtract.replace(/ /g, "-");
-  var filename = 'project_extract' + projectNameToExtract + '.csv';
+  var filename = 'project_extract' + projectNameToExtract + d + '.csv';
   var writeData = 'Type' + ',' + 'ID' + ',' + 'Name' + ',' + 'columnID' + ',' + 'columnName' + ',' + 'ContentType' + ',' + 'ContentID' + ',' + 'Content'; 	 
   fs.appendFile(filename, writeData + eol, function (err) {
 					if (err) {
