@@ -10,7 +10,7 @@ MacBook-Pro:githubextract viyer$ ls ~/.gitHubExtract.config
 ```
 The contents of the file are as such
 ```
-username=cognosante1ven1iyer
+username=veniyer
 password=*************
 token=************************
 projectID=*****
